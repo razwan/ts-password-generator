@@ -1,5 +1,6 @@
 import readline from "readline";
-import { generateMultiplePasswords } from './utils';
+
+import { generateMultiplePasswords } from './password';
 
 const rl = readline.createInterface({
   input: process.stdin,

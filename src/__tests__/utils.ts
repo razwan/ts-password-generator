@@ -1,36 +1,8 @@
-import { digitiseLetter, generateMultiplePasswords, generatePassword, getNRandomItemsFromArray, randomizeCapitalisation, shuffleArray } from "../utils";
+import { digitiseLetter, getNRandomItemsFromArray, randomizeCapitalisation, shuffleArray } from "../utils";
 
 const generateStringArray = ( length: number ) => {
     return Array.from(Array(length).keys()).map( x => `${ x }`);
 }
-
-// generatePassword
-// - length of password is correct
-// - number of special characters in generated is correct
-// - number of digits in generated password is greater or equal than requested
-test( 'length of password is correct', () => {
-    const useCases = [
-        [ 10, 3, 3, 10 ],
-        [ 10, 0, 0, 10 ],
-        [ 10, 10, 10, 20 ]
-    ];
-
-
-    useCases.forEach( useCase => { 
-        const [ length, symbolsCount, digitsCount, expected ] = useCase;
-        const password = generatePassword( length, symbolsCount, digitsCount );
-        expect( password.length ).toBe( expected );
-    } )
-} )
-
-// generateMultiplePasswords
-// - correct number of passwords generated
-test( 'number of generated passwords is correct', () => {
-    const count = 3;
-    const passwords = generateMultiplePasswords(count, 10, 3, 3);
-    expect(Array.isArray(passwords)).toBe(true);
-    expect(passwords.length).toBe(count);
-} );
 
 // shuffleArray - implementation detail / algorithm 
 // - every item is present in the shuffled array
@@ -98,7 +70,7 @@ test( 'items returned by getNRandomItemsFromArray are in random order', () => {
 // - toUppercase equality
 test( 'capitalisation does not change other aspects of the string', () => {
     // arrange
-    const password = generatePassword( 10, 3, 3 );
+    const password = 'AaBbCbA';
 
     // act
     const capitalised = randomizeCapitalisation( password.split( '' ) ).join( '' );

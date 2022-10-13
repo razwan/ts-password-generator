@@ -22,7 +22,7 @@ const getRandomBoolean: () => boolean = () => {
     return !! Math.floor( Math.random() * 2 );
 }
 
-export const getRandomItemFromArray = ( source: Array<any> ) => {
+const getRandomItemFromArray = ( source: Array<any> ) => {
     const randomIndex = Math.floor( Math.random() * source.length );
     return source[ randomIndex ];
 }
@@ -56,25 +56,6 @@ export const randomizeLettersToDigits = ( array: Array<string> ) => {
     return array.map( x => getRandomBoolean() ? digitiseLetter(x) : x );
 }
 
-export const generatePassword = ( length: number, symbolsCount: number, digitsCount: number ) => {
-    const alpha = Array.from(Array(26)).map((e, i) => i + 65);
-    const alphabet = alpha.map((x) => String.fromCharCode(x));
-    const digits = '0123456789'.split('');
-    const symbols = '~`! @#$%^&*()_-+={[}]|:;"\'<,>.?/'.split('');
-    const lettersCount = Math.max( length - symbolsCount - digitsCount, 0 );
-
-    const mySpecialCharacters = getNRandomItemsFromArray( symbolsCount, symbols );
-    const myDigits = getNRandomItemsFromArray( digitsCount, digits );
-    const myLetters = getNRandomItemsFromArray( lettersCount, alphabet );
-
-    const myCharacters = mySpecialCharacters.concat( myDigits, myLetters );
-    const shuffledCharacters = shuffleArray( myCharacters );
-    const capitalisedPassword = randomizeCapitalisation( shuffledCharacters );
-    const digitisedPassword = randomizeLettersToDigits( capitalisedPassword );
-
-    return digitisedPassword.join('');
-}
-
-export const generateMultiplePasswords = ( count: number, length: number, symbolsCount: number, digitsCount: number ) => {
-    return Array( count ).fill( undefined ).map( () => generatePassword( length, symbolsCount, digitsCount ) );
+const isFractional = ( number: number ) => {
+    return Math.floor( number ) !== number;
 }

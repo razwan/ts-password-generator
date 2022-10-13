@@ -1,3 +1,7 @@
+export const random = () => {
+    return Math.random();
+}
+
 export const shuffleArray = ( array: Array<string> ) => {
     const toShuffle = array.slice();
     let currentIndex = toShuffle.length;
@@ -7,7 +11,7 @@ export const shuffleArray = ( array: Array<string> ) => {
     while (currentIndex != 0) {
   
       // Pick a remaining element.
-      randomIndex = Math.floor(Math.random() * currentIndex);
+      randomIndex = Math.floor(random() * currentIndex);
       currentIndex--;
   
       // And swap it with the current element.
@@ -19,11 +23,11 @@ export const shuffleArray = ( array: Array<string> ) => {
 }  
 
 const getRandomBoolean: () => boolean = () => {
-    return !! Math.floor( Math.random() * 2 );
+    return !! Math.floor( random() * 2 );
 }
 
 const getRandomItemFromArray = ( source: Array<any> ) => {
-    const randomIndex = Math.floor( Math.random() * source.length );
+    const randomIndex = Math.floor( random() * source.length );
     return source[ randomIndex ];
 }
 

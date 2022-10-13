@@ -4,7 +4,7 @@ export const generatePassword = ( length: number, symbolsCount: number, digitsCo
     const alpha = Array.from(Array(26)).map((e, i) => i + 65);
     const alphabet = alpha.map((x) => String.fromCharCode(x));
     const digits = '0123456789'.split('');
-    const symbols = '~`! @#$%^&*()_-+={[}]|:;"\'<,>.?/'.split('');
+    const symbols = '~`!@#$%^&*()_-+={[}]|:;"\'<,>.?/'.split('');
 
     if ( length < 1 || symbolsCount < 0 || digitsCount < 0 ) {
         throw new Error( 'Negative numbers are invalid parameters' )

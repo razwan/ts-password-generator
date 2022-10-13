@@ -1,8 +1,29 @@
+import seedrandom from "seedrandom";
+import * as utils from "../utils";
 import { generateMultiplePasswords, generatePassword } from "../password";
+
+
+test( 'given a seedable RNG returns expected passwords', () => {
+    // arrange
+    jest.spyOn( utils, 'random' ).mockImplementation( seedrandom( 'test' ) );
+    const length = 10;
+    const symbolsCount = 2;
+    const digitsCount = 2;
+
+    // act
+    const passwords = generateMultiplePasswords( 3, length, symbolsCount, digitsCount )
+
+    // assert
+    expect( passwords ).toEqual( [
+        "93M_hl>cSj", 
+        "*NnFV40tu*", 
+        "Mp1P@g,9K4"
+    ] );
+} );
 
 // generatePassword
 // - length of password is correct
-// - number of special characters in generated is correct
+// - number of special characters in generated password is correct
 // - number of digits in generated password is greater or equal than requested
 test( 'throws error for negative parameters', () => {
     const useCases = [
@@ -60,6 +81,20 @@ test( 'length of password is correct', () => {
         expect( password.length ).toBe( expected );
     } )
 } )
+
+test( 'number of special characters in generated password is correct', () => {
+    const length = 10;
+    const symbolsCount = 2;
+    const digitsCount = 2;
+    const nonAlphaNumericRegexp = new RegExp( '[^a-zA-Z0-9]', 'g' );
+
+    // act
+    const password = generatePassword( length, symbolsCount, digitsCount );
+    const symbols = password.match( nonAlphaNumericRegexp );
+
+    // assert
+    expect( symbols ).toHaveLength( symbolsCount );
+} );
 
 // generateMultiplePasswords
 // - correct number of passwords generated

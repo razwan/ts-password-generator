@@ -2,7 +2,6 @@ import seedrandom from "seedrandom";
 import * as utils from "../utils";
 import { generateMultiplePasswords, generatePassword } from "../password";
 
-
 test( 'given a seedable RNG returns expected passwords', () => {
     // arrange
     jest.spyOn( utils, 'random' ).mockImplementation( seedrandom( 'test' ) );
@@ -19,6 +18,20 @@ test( 'given a seedable RNG returns expected passwords', () => {
         "*NnFV40tu*", 
         "Mp1P@g,9K4"
     ] );
+} );
+
+test( 'generated passwords are not identical', () => {
+    // arrange
+    const length = 6;
+    const symbolsCount = 2;
+    const digitsCount = 2;
+
+    // act
+    const passwords = generateMultiplePasswords( 1000, length, symbolsCount, digitsCount );
+    const duplicates = passwords.filter( ( password, index, array ) => index !== array.indexOf( password ) );
+
+    // assert
+    expect( duplicates ).toEqual( [] );
 } );
 
 // generatePassword
